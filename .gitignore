@@ -1,0 +1,18 @@
+# Next.js build directories
+.next/
+out/
+node_modules/
+
+# Word files and document archives
+*.docx
+*.mhtml
+тз.docx
+Тз.md
+Портфель*.mhtml
+
+# OS and browser system files
+.DS_Store
+Thumbs.db
+
+# Local environment variables
+.env*.local 
