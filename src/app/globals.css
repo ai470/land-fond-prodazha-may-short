@@ -99,7 +99,7 @@ summary {
 .section-head h2 {
     margin: 0;
     color: var(--blue);
-    font-size: clamp(2rem, 4vw, 3.6rem);
+    font-size: clamp(1.8rem, 3.4vw, 3rem);
     line-height: 1.06;
     font-weight: 900;
     text-wrap: balance;
@@ -424,7 +424,7 @@ summary {
     max-width: 720px;
     margin: 0;
     color: var(--white);
-    font-size: clamp(2.3rem, 4vw, 4.2rem);
+    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
     line-height: 1.1;
     font-weight: 900;
     text-transform: uppercase;
@@ -452,8 +452,8 @@ summary {
     display: grid;
     gap: 10px;
     max-width: 520px;
-    margin: 22px 0 28px;
-    animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.28s backwards;
+    margin: 0 0 28px;
+    animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s backwards;
 }
 
 .hero-stats li {
@@ -502,7 +502,8 @@ summary {
     flex-wrap: wrap;
     gap: 14px;
     align-items: center;
-    animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.35s backwards;
+    margin: 24px 0;
+    animation: heroRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.28s backwards;
 }
 
 .hero-cta {
@@ -536,9 +537,10 @@ summary {
 
 .hero-visual {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     position: relative;
+    align-self: flex-end;
 }
 
 .hero-chart-wrap {
@@ -554,7 +556,7 @@ summary {
 
 .hero-float-card {
     position: absolute;
-    bottom: -20px;
+    bottom: 30px;
     left: -20px;
     display: grid;
     grid-template-columns: 44px 1fr;
@@ -655,16 +657,23 @@ summary {
     overflow: hidden;
     background: var(--blue);
     padding: 14px 0;
+    display: flex;
 }
 
 .ticker-track {
     display: flex;
-    gap: 24px;
-    white-space: nowrap;
+    width: max-content;
     animation: ticker 28s linear infinite;
 }
 
-.ticker-track span {
+.ticker-content {
+    display: flex;
+    gap: 24px;
+    padding-right: 24px;
+    white-space: nowrap;
+}
+
+.ticker-content span {
     color: rgba(255, 255, 255, 0.88);
     font-size: 0.88rem;
     font-weight: 800;
@@ -673,17 +682,16 @@ summary {
     flex-shrink: 0;
 }
 
-.ticker-track .sep {
+.ticker-content .sep {
     color: var(--orange);
 }
 
 @keyframes ticker {
-    from {
+    0% {
         transform: translateX(0);
     }
-
-    to {
-        transform: translateX(-50%);
+    100% {
+        transform: translateX(-25%);
     }
 }
 
@@ -822,10 +830,8 @@ summary {
 }
 
 .forwhom-card {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-    align-items: stretch;
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 28px;
@@ -843,13 +849,24 @@ summary {
 
 .forwhom-img-wrap {
     overflow: hidden;
+    padding: 16px 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    flex-shrink: 0;
 }
 
 .forwhom-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 18px;
     transition: transform 0.45s ease;
+}
+
+.forwhom-card:nth-child(3) .forwhom-img {
+    object-position: center 80%;
 }
 
 .forwhom-card:hover .forwhom-img {
@@ -1584,20 +1601,20 @@ summary {
 
 .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-    max-width: 980px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    max-width: 1240px;
     margin: 0 auto;
 }
 
 .pricing-card {
     position: relative;
     display: grid;
-    gap: 24px;
+    gap: 16px;
     align-content: start;
     border: 1px solid rgba(254, 151, 63, 0.5);
     border-radius: 28px;
-    padding: 30px;
+    padding: 28px 22px 22px;
     background: rgba(255, 255, 255, 0.82);
     box-shadow: 0 26px 70px rgba(1, 51, 76, 0.1);
     transition: transform 0.28s ease, box-shadow 0.28s ease;
@@ -1609,7 +1626,6 @@ summary {
 }
 
 .pricing-card-featured {
-    overflow: hidden;
     border-color: rgba(255, 255, 255, 0.32);
     background:
         radial-gradient(circle at 88% 12%, rgba(254, 151, 63, 0.22), transparent 26%),
@@ -1620,23 +1636,32 @@ summary {
 
 .pricing-featured-badge {
     position: absolute;
-    top: 22px;
-    right: 22px;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    white-space: nowrap;
     border-radius: 999px;
     padding: 6px 16px;
     background: var(--orange);
     color: var(--white);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 900;
     text-transform: uppercase;
+    box-shadow: 0 4px 12px rgba(254, 151, 63, 0.3);
+}
+
+.pricing-card-head {
+    text-align: center;
 }
 
 .pricing-card-head h3 {
     margin: 0 0 4px;
     color: var(--orange);
-    font-size: 1.3rem;
+    font-size: 1.9rem;
     font-weight: 900;
     text-transform: uppercase;
+    letter-spacing: 0.01em;
 }
 
 .pricing-card-featured .pricing-card-head h3 {
@@ -1644,10 +1669,11 @@ summary {
 }
 
 .pricing-card-desc {
-    margin: 0 0 16px;
+    margin: 0 0 10px;
     color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
     font-weight: 650;
+    min-height: 2.8em;
 }
 
 .pricing-card-featured .pricing-card-desc {
@@ -1656,16 +1682,17 @@ summary {
 
 .pricing-price-wrap {
     display: flex;
-    align-items: baseline;
-    gap: 14px;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
 }
 
 .price-old {
     color: rgba(1, 51, 76, 0.32);
-    font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
     font-weight: 900;
     text-decoration: line-through;
+    line-height: 1.1;
 }
 
 .pricing-card-featured .price-old {
@@ -1674,9 +1701,9 @@ summary {
 
 .price-new {
     color: var(--orange);
-    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-size: clamp(1.4rem, 2.5vw, 2.3rem);
     font-weight: 900;
-    line-height: 1;
+    line-height: 1.1;
 }
 
 .pricing-card-featured .price-new {
@@ -1685,13 +1712,13 @@ summary {
 
 .pricing-duration {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
 .pricing-duration-item {
     border-radius: 14px;
-    padding: 12px 14px;
+    padding: 6px 14px;
     background: rgba(254, 151, 63, 0.1);
     text-align: center;
 }
@@ -1723,19 +1750,21 @@ summary {
 
 .pricing-features {
     display: grid;
-    gap: 10px;
+    gap: 8px;
 }
 
 .pricing-features li {
     position: relative;
     padding-left: 30px;
     color: #263f4b;
-    font-size: 0.96rem;
+    font-size: 0.84rem;
     font-weight: 700;
+    opacity: 0.82;
 }
 
 .pricing-card-featured .pricing-features li {
     color: var(--white);
+    opacity: 0.88;
 }
 
 .pricing-features li::before {
@@ -2309,6 +2338,10 @@ summary {
     .timeline-body {
         grid-column: 2;
     }
+
+    .pricing-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 /* =========================================
@@ -2356,14 +2389,6 @@ summary {
         min-height: 160px;
     }
 
-    .forwhom-card {
-        grid-template-columns: 1fr;
-    }
-
-    .forwhom-card:nth-child(even) .forwhom-img-wrap {
-        order: -1;
-    }
-
     .hiw-grid {
         grid-template-columns: 1fr;
     }
@@ -2394,6 +2419,19 @@ summary {
 
     .section-head h2 {
         font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+    }
+
+    .forwhom-body {
+        text-align: center;
+        align-items: center;
+    }
+
+    .forwhom-num {
+        margin-inline: auto;
+    }
+
+    .forwhom-after {
+        text-align: center;
     }
 
     .hero-section {
@@ -2470,10 +2508,7 @@ summary {
         padding: 24px;
     }
 
-    .pricing-featured-badge {
-        top: 16px;
-        right: 16px;
-    }
+
 
     .bonus-modules {
         padding: 28px 22px;

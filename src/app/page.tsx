@@ -86,9 +86,9 @@ const GetCourseWidget: React.FC<GetCourseWidgetProps> = ({ scriptId, widgetId })
   const containerHeight = Math.max(380, iframeHeight - 40);
 
   return (
-    <div 
+    <div
       className={`gc-widget-container ${loaded ? "loaded" : "loading"}`}
-      style={{ 
+      style={{
         height: loaded ? `${containerHeight}px` : "380px",
         minHeight: loaded ? `${containerHeight}px` : "380px",
       }}
@@ -284,6 +284,11 @@ export default function Home() {
                 Соберите свой первый инвестиционный портфель за 8 недель — с системой, инструментами и поддержкой экспертов
               </p>
 
+              <div className="hero-actions">
+                <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary hero-cta" id="hero-cta-btn">Выбрать тариф →</a>
+                <p className="hero-note">Рассрочка — от 5&nbsp;999&nbsp;₽/мес.</p>
+              </div>
+
               <ul className="hero-stats">
                 <li>
                   <span className="stat-icon">
@@ -310,14 +315,9 @@ export default function Home() {
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                     </svg>
                   </span>
-                  <div><strong>Сертификат</strong><span>установленного образца по прохождению программы</span></div>
+                  <div><strong>Свидетельство об обучении  по прохождению программы</strong><span>установленного образца по прохождению программы</span></div>
                 </li>
               </ul>
-
-              <div className="hero-actions">
-                <a href="#pricing" onClick={(e) => handleAnchorClick(e, "pricing")} className="cta cta-primary hero-cta" id="hero-cta-btn">Выбрать тариф →</a>
-                <p className="hero-note">Рассрочка — от 5&nbsp;999&nbsp;₽/мес.</p>
-              </div>
             </div>
 
             <div className="hero-visual">
@@ -348,34 +348,70 @@ export default function Home() {
         {/* ===== TICKER ===== */}
         <div className="ticker-wrap" aria-hidden="true">
           <div className="ticker-track">
-            <span>Первый поток</span>
-            <span className="sep">·</span>
-            <span>8 модулей</span>
-            <span className="sep">·</span>
-            <span>46 уроков</span>
-            <span className="sep">·</span>
-            <span>10 инструментов</span>
-            <span className="sep">·</span>
-            <span>Старт 8 июня</span>
-            <span className="sep">·</span>
-            <span>Рассрочка 0%</span>
-            <span className="sep">·</span>
-            <span>Сертификат</span>
-            <span className="sep">·</span>
-            <span>Первый поток</span>
-            <span className="sep">·</span>
-            <span>8 модулей</span>
-            <span className="sep">·</span>
-            <span>46 уроков</span>
-            <span className="sep">·</span>
-            <span>10 инструментов</span>
-            <span className="sep">·</span>
-            <span>Старт 8 июня</span>
-            <span className="sep">·</span>
-            <span>Рассрочка 0%</span>
-            <span className="sep">·</span>
-            <span>Сертификат</span>
-            <span className="sep">·</span>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
+            <div className="ticker-content">
+              <span>Первый поток</span>
+              <span className="sep">·</span>
+              <span>8 модулей</span>
+              <span className="sep">·</span>
+              <span>46 уроков</span>
+              <span className="sep">·</span>
+              <span>10 инструментов</span>
+              <span className="sep">·</span>
+              <span>Старт 8 июня</span>
+              <span className="sep">·</span>
+              <span>Рассрочка 0%</span>
+              <span className="sep">·</span>
+              <span>Свидетельство</span>
+              <span className="sep">·</span>
+            </div>
           </div>
         </div>
 
@@ -383,7 +419,6 @@ export default function Home() {
         <section className="section timeline-section reveal-section" id="about">
           <div className="container">
             <div className="section-head">
-              <p className="section-kicker">Результат недели за неделей</p>
               <h2>За 8 недель вы пройдёте путь<br />от «не знаю, с чего начать»<br />до <span className="heading-accent">собственного портфеля</span></h2>
               <p>Это не набор лекций. Каждый модуль заканчивается конкретным результатом — документом, инструментом, решением.</p>
             </div>
@@ -504,7 +539,7 @@ export default function Home() {
               </article>
 
               <article className="pricing-card pricing-card-featured reveal-item" id="tarif-portfolio">
-                <div className="pricing-featured-badge">Популярный</div>
+                <div className="pricing-featured-badge">Хит продаж</div>
                 <div className="pricing-card-head">
                   <h3>Портфель</h3>
                   <p className="pricing-card-desc">Для тех, кто хочет собрать и проверить свою стратегию</p>
@@ -544,6 +579,7 @@ export default function Home() {
               </article>
 
               <article className="pricing-card reveal-item" id="tarif-capital">
+                <div className="pricing-featured-badge">Рекомендуемый</div>
                 <div className="pricing-card-head">
                   <h3>Капитал</h3>
                   <p className="pricing-card-desc">Для тех, кто строит финансовую систему на годы</p>
@@ -628,10 +664,16 @@ export default function Home() {
                 <span>Telegram</span>
               </a>
               <a href="https://dzen.ru/volkovacapital" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 11v5h-2v-5H6v-2h5V6h2v5h5v2h-5Z" />
+                <svg viewBox="0 0 129 129">
+                  <path d="M128.389 62.7804C128.389 62.1406 127.869 61.6108 127.229 61.5808C104.266 60.7111 90.2906 57.782 80.5136 48.0051C70.7167 38.2081 67.7976 24.2225 66.9279 1.20969C66.9079 0.569886 66.3781 0.0500488 65.7283 0.0500488H63.0491C62.4093 0.0500488 61.8795 0.569886 61.8495 1.20969C60.9797 24.2125 58.0607 38.2081 48.2637 48.0051C38.4768 57.792 24.5111 60.7111 1.54831 61.5808C0.908509 61.6008 0.388672 62.1306 0.388672 62.7804V65.4596C0.388672 66.0994 0.908509 66.6292 1.54831 66.6592C24.5111 67.529 38.4868 70.458 48.2637 80.235C58.0407 90.0119 60.9597 103.958 61.8395 126.88C61.8595 127.52 62.3893 128.04 63.0391 128.04H65.7283C66.3681 128.04 66.8979 127.52 66.9279 126.88C67.8076 103.958 70.7267 90.0119 80.5036 80.235C90.2906 70.448 104.256 67.529 127.219 66.6592C127.859 66.6392 128.379 66.1094 128.379 65.4596V62.7804H128.389Z" />
                 </svg>
                 <span>Дзен</span>
+              </a>
+              <a href="https://max.ru/volkovacapital" target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 46 42">
+                  <path fillRule="evenodd" clipRule="evenodd" d="M21.4701 41.58C17.3601 41.58 15.4501 40.98 12.1301 38.58C10.0301 41.28 3.38008 43.39 3.09008 39.78C3.09008 37.07 2.49008 34.78 1.81008 32.28C1.00008 29.2 0.0800781 25.77 0.0800781 20.8C0.0800781 8.93 9.82008 0 21.3601 0C32.9101 0 41.9601 9.37 41.9601 20.91C41.9787 26.3666 39.8316 31.6076 35.9902 35.4829C32.1487 39.3581 26.9266 41.5509 21.4701 41.58ZM21.6401 10.26C16.0201 9.97 11.6401 13.86 10.6701 19.96C9.87008 25.01 11.2901 31.16 12.5001 31.48C13.0801 31.62 14.5401 30.44 15.4501 29.53C16.9548 30.5695 18.7071 31.1938 20.5301 31.34C23.3293 31.4746 26.0697 30.5057 28.1622 28.6414C30.2546 26.777 31.5321 24.1662 31.7201 21.37C31.8295 18.568 30.8346 15.8351 28.9495 13.7592C27.0643 11.6833 24.4396 10.4303 21.6401 10.27V10.26Z" />
+                </svg>
+                <span>Макс</span>
               </a>
             </div>
           </div>
@@ -643,7 +685,8 @@ export default function Home() {
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/5bdab7bbf2de4293f7fa895ef1dfdca3.pdf" target="_blank" rel="noopener">Согласие на обработку персональных данных</a>
               <a href="https://monterium.ru/pl/fileservice/user/file/download/h/0299becb7a7fe4a85eea80dbcff2f411.pdf" target="_blank" rel="noopener">Согласие на получение рекламы</a>
               <a href="https://monterium.site/doc" target="_blank" rel="noopener">Сведения об образовательной организации</a>
-              <a href="https://monterium.ru/oferta_fn" target="_blank" rel="noopener">Оферта</a>
+              <a href="https://monterium.ru/pl/fileservice/user/file/download/h/4aeaf22ebca129e110ba8f0426a97143.pdf" target="_blank" rel="noopener">Оферта</a>
+              <a href="https://monterium.ru/pl/fileservice/user/file/download/h/a69c03368bbda7b408c2adfbce471c6c.pdf" target="_blank" rel="noopener">Правила акции</a>
             </nav>
             <div className="footer-company">
               <p>АНО ДПО «ИНСТИТУТ СОВРЕМЕННЫХ ТЕХНОЛОГИЙ И ФИНАНСОВ "МОНТЕРИУМ"»</p>
