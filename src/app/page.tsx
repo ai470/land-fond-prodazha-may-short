@@ -61,10 +61,29 @@ const GetCourseWidget: React.FC<GetCourseWidgetProps> = ({ scriptId, widgetId })
   const [iframeHeight, setIframeHeight] = useState(620); // Increased robust default height
 
   useEffect(() => {
-    const search = window.location.search ? window.location.search.substring(1) + "&" : "";
-    const ref = encodeURIComponent(document.referrer || "");
-    const loc = encodeURIComponent(window.location.href);
-    setSrc(`https://monterium.ru/pl/lite/widget/widget?${search}id=${widgetId}&ref=${ref}&loc=${loc}`);
+    const buildGetCourseUrl = () => {
+      if (typeof window === "undefined") return "";
+      const params = new URLSearchParams(window.location.search);
+      const newParams = new URLSearchParams();
+      
+      // Get all keys starting with utm_ or equal to ref, normalize to lowercase
+      params.forEach((value, key) => {
+        const lowerKey = key.toLowerCase();
+        if (lowerKey.startsWith("utm_") || lowerKey === "ref") {
+          newParams.set(lowerKey, value.toLowerCase());
+        }
+      });
+      
+      newParams.set("id", widgetId);
+      if (!newParams.has("ref")) {
+        newParams.set("ref", document.referrer || "");
+      }
+      newParams.set("loc", window.location.href);
+      
+      return `https://monterium.ru/pl/lite/widget/widget?${newParams.toString()}`;
+    };
+
+    setSrc(buildGetCourseUrl());
   }, [widgetId]);
 
   useEffect(() => {
@@ -115,6 +134,7 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [countdownText, setCountdownText] = useState("Старт потока — 8 июня");
+  const [shouldLoadWidgets, setShouldLoadWidgets] = useState(false);
   const [activeTariffPopup, setActiveTariffPopup] = useState<{
     id: string;
     widgetId: string;
@@ -122,6 +142,35 @@ export default function Home() {
     title: string;
     price: string;
   } | null>(null);
+
+  // Lazy preloading of GetCourse widgets after initial mount to maximize page speed
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldLoadWidgets(true);
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Body scroll lock and Escape key handler
+  useEffect(() => {
+    if (activeTariffPopup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveTariffPopup(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeTariffPopup]);
 
   const openTariffPopup = (tariffName: string) => {
     const tariffs: { [key: string]: any } = {
@@ -707,26 +756,51 @@ export default function Home() {
         </div>
       </footer>
 
-      {activeTariffPopup && (
-        <div className="modal-overlay" onClick={() => setActiveTariffPopup(null)}>
-          <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+      <div
+        className="modal-overlay"
+        style={{
+          display: activeTariffPopup ? "flex" : "none",
+        }}
+        onClick={() => setActiveTariffPopup(null)}
+      >
+        <div className="modal-container" onClick={(e) => e.stopPropagation()}>
+          {activeTariffPopup && (
             <div className="modal-header">
               <div className="modal-header-title-wrap">
-                <h3>Регистрация на курс</h3>
-                <span className="modal-subtitle">{activeTariffPopup.title} · {activeTariffPopup.price}</span>
+                <h3>Оформление заказа</h3>
+                <span className="modal-subtitle">{activeTariffPopup.title}</span>
               </div>
-              <button className="modal-close-btn" onClick={() => setActiveTariffPopup(null)} aria-label="Закрыть">
+              <button
+                className="modal-close-btn"
+                onClick={() => setActiveTariffPopup(null)}
+                aria-label="Закрыть"
+              >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="modal-close-svg">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="modal-body">
-              <GetCourseWidget scriptId={activeTariffPopup.scriptId} widgetId={activeTariffPopup.widgetId} />
-            </div>
+          )}
+          <div className="modal-body">
+            {shouldLoadWidgets && (
+              <>
+                <div style={{ display: activeTariffPopup?.id === "start" ? "block" : "none", width: "100%" }}>
+                  <GetCourseWidget scriptId="4a23c25c88911c4011ff1ea03b9d807045faf436" widgetId="1609026" />
+                </div>
+                <div style={{ display: activeTariffPopup?.id === "practice" ? "block" : "none", width: "100%" }}>
+                  <GetCourseWidget scriptId="60cc6ad32208dedb2c6ae368ac14956c4da2f648" widgetId="1609027" />
+                </div>
+                <div style={{ display: activeTariffPopup?.id === "portfolio" ? "block" : "none", width: "100%" }}>
+                  <GetCourseWidget scriptId="1df9737ee68214aec42e5ce52631bc3d37b6c62d" widgetId="1609028" />
+                </div>
+                <div style={{ display: activeTariffPopup?.id === "capital" ? "block" : "none", width: "100%" }}>
+                  <GetCourseWidget scriptId="fe4c481df796c329c9d190e90ec408b78e779cfe" widgetId="1609031" />
+                </div>
+              </>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
